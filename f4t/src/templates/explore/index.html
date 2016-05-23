@@ -27,7 +27,7 @@
           Ok, so we need a form here to get parameters for the visulisation
           <form action="{% url 'explore:run' %}" method="post">
           {% csrf_token %}
-          {% for choice in explore.feature_set.all %}
+          {% for feature in explore.feature_set.all %}
               <input type="radio" name="feature" id="feature{{ forloop.counter }}" value="{{ feature.id }}" />
               <label for="feature{{ forloop.counter }}">{{ feature.feature_text }}</label><br />
           {% endfor %}

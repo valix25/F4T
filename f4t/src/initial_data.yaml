@@ -1,0 +1,20 @@
+- model: f4t.feature
+  pk: 1
+  fields:
+    feature_text: HOUSEHOLD_ID
+- model: f4t.feature
+  pk: 2
+  fields:
+    feature_text: HOUSEHOLD_CLAIMED_FAMILY_SIZE
+- model: f4t.feature
+  pk: 3
+  fields:
+    feature_text: HOUSEHOLD_REGISTRATION_DATE
+- model: f4t.feature
+  pk: 4
+  fields:
+    feature_text: HOUSEHOLD_REGISTRATION_USER_ID
+- model: f4t.feature
+  pk: 5
+  fields:
+    feature_text: HOUSEHOLD_REFUGEE_STATUS
