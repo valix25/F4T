@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Explore{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="home" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-default" href="{% url 'accounts:login' %}" role="button">Log in</a>
+<a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block splash %}
+  <div class="jumbotron jumbotron-carousel corporate-jumbo">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-8">
+          This is where the visualisation will go
+          Ok, so we need a form here to get parameters for the visulisation
+          <form action="{% url 'explore:run' %}" method="post">
+          {% csrf_token %}
+          {% for choice in explore.feature_set.all %}
+              <input type="radio" name="feature" id="feature{{ forloop.counter }}" value="{{ feature.id }}" />
+              <label for="feature{{ forloop.counter }}">{{ feature.feature_text }}</label><br />
+          {% endfor %}
+          <input type="submit" value="Cluster!" />
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-sm-8">
+          <h1>{% include "_brandname.html" %} - EXplore</h1>
+          <p>Cluster and Visualise Variation in Diet across Refugee Populations</p>
+        </div>
+        <div class="col-md-4 col-sm-4">
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock splash %}
+
+{% block container %}
+<!-- Benefits of the Django application -->
+<a name="about"></a>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <h2>1. Select Cluster Variables</h2>
+      <p>
+        In order to enable interpretation of dietary habits, it is useful to find natural groupings in the dataset. For example, clusters may identify families which have similar structure, status and demographics.
+      </p>
+      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-lg-4">
+      <h2>2. Visualise within cluster variability</h2>
+      <p>
+        Dive down into the data, explore the dietary distribution of different clusters. Comparing distributions can highlight potential nutritional imbalances and help target interventions.
+      </p>
+      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+    </div>
+    <div class="col-lg-4">
+      <h2>3. Look for seasonal trends in buying patterns</h2>
+      <p>
+        In addition to breaking down buying habbits over sub-populations, we can also visualise how the items bought by a group of families varies over time.
+      </p>
+      <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+    </div>
+  </div>
+</div>
+
+{% endblock container %}
+
+<!-- {% block scripts %}
+ --><script src="{% static 'site/js/site.js' %}"></script>
+<!-- {% endblock scripts %}
+ -->
